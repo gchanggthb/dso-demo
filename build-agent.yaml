@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  name: build-agent
+  namespace: ci
   labels:
     app: spring-build-ci
 spec:
@@ -75,8 +77,10 @@ spec:
         # but the default VOLUME does not work with rootless on Google's Container-Optimized OS
         # as it is mounted with `nosuid,nodev`.
         # https://github.com/moby/buildkit/issues/879#issuecomment-1240347038
-        - mountPath: /home/user/.local/share/buildkit
-          name: buildkitd
+        - name: buildkitd
+          mountPath: /home/user/.local/share/buildkit
+        - name: jenkins-docker-cfg
+          mountPath: /home/user/.docker
     - name: trufflehog
       image: rmkanda/trufflehog
       command:
@@ -102,4 +106,13 @@ spec:
         secretName: buildkit-daemon-certs
     - name: buildkitd
       emptyDir: {}
+    - name: jenkins-docker-cfg
+      projected:
+        sources:
+        - secret:
+            name: regcred
+            items:
+            - key: .dockerconfigjson
+              path: config.json
+
 

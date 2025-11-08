@@ -98,8 +98,8 @@ spec:
       hostPath:
         path: /tmp/trivycache/
     - name: certs
-          secret:
-            secretName: buildkit-daemon-certs
+      secret:
+        secretName: buildkit-daemon-certs
     - name: buildkitd
       emptyDir: {}
 

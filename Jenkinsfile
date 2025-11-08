@@ -6,6 +6,9 @@ pipeline {
       idleMinutes 1
     }
   }
+  triggers {
+    githubPush()
+  }
   stages {
     stage('Build') {
       parallel {

@@ -38,6 +38,13 @@ pipeline {
             }
           }
         }
+        stage('Docker BnP') {
+          steps {
+            container('buildkitd') {
+              sh 'buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=.'
+            }
+          }
+        }
       }
     }
 

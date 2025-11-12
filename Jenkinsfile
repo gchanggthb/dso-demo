@@ -38,11 +38,9 @@ pipeline {
             }
           }
           steps {
-              container('owasp') {
-                echo 'OWASP'
-//              dependencyCheck additionalArguments: ''' -o './' -s './' -f 'ALL' --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
-//              dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-                sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --format '"'ALL'"' --project '"'dso-demo'"' --out /reports'
+            container('owasp') {
+              echo 'OWASP'
+              sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --out /reports'
             }
           }
         }

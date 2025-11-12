@@ -112,7 +112,8 @@ spec:
 #    - name: buildkitd
 #      emptyDir: {}
     - name: reports
-      hostPath: /home/user1/reports
+      hostPath:
+        path: /home/user1/reports
     - name: jenkins-docker-cfg
       projected:
         sources:

@@ -39,9 +39,10 @@ pipeline {
           }
           steps {
               container('owasp') {
-//            dependencyCheck additionalArguments: ''' -o './' -s './' -f 'ALL' --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
-//            dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-              sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --format '"'ALL'"' --project '"'dso-demo'"' --out /reports'
+                echo 'OWASP'
+//              dependencyCheck additionalArguments: ''' -o './' -s './' -f 'ALL' --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+//              dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --format '"'ALL'"' --project '"'dso-demo'"' --out /reports'
             }
           }
         }

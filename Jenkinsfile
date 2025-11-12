@@ -51,7 +51,7 @@ pipeline {
             }
           }
         }
-        stage('Docker BnP') {
+/*        stage('Docker BnP') {
           steps {
             container('buildkitd') {
               sh 'buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=docker.io/gchangdckr/dsodemo:tag1,push=true'
@@ -60,7 +60,7 @@ pipeline {
         }
       }
     }
-
+*/
     stage('Deploy to Dev') {
       steps {
         // TODO

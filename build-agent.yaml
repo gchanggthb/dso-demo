@@ -25,11 +25,6 @@ spec:
           name: docker-sock
         - mountPath: /tmp/trivycache/
           name: trivycache
-    - name: owasp
-      image: owasp/dependency-check:12.1.9
-      volumeMounts:
-        - name: reports
-          mountPath: /reports
 #    - name: buildkitd
 #      image: moby/buildkit:master-rootless
 #      args:

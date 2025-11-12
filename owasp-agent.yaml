@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: owasp-agent
+  namespace: ci
+  labels:
+    app: spring-build-ci
+spec:
+  containers:
+    - name: owasp
+      image: owasp/dependency-check-action:latest
+#      command: ["/usr/share/dependency-check/bin/dependency-check.sh"]
+#      args: ["--scan", "/src", "--format", "ALL", "--project", "My Project", "--out", "/reports"]
+      tty: true
+      volumeMounts:
+        - name: src
+          mountPath: /src
+        - name: reports
+          mountPath: /reports
+  volumes:
+    - name: src
+      hostPath:
+        path: /
+    - name: reports
+      hostPath:
+        path: /home/user1/reports
+

@@ -21,13 +21,23 @@ pipeline {
         }
       }
     }
-    stage('Test') {
+    stage('Static Analysis') {
       parallel {
         stage('Unit Tests') {
           steps {
             container('maven') {
               sh 'mvn test'
             }
+          }
+        }
+        stage('SCA') {
+          steps {
+            dependencyCheck additionalArguments: '''
+              -o './'
+              -s './'
+              -f 'ALL'
+              --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+            dependencyCheckPublisher pattern: 'dependency-check-report.xml'
           }
         }
       }

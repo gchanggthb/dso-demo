@@ -31,10 +31,16 @@ pipeline {
           }
         }
         stage('SCA') {
+          agent {
+            kubernetes {
+              yamlFile 'owasp-agent.yaml'
+              defaultContainer 'owasp'
+            }
+          }
           steps {
-            container('owasp') {
-//              dependencyCheck additionalArguments: ''' -o './' -s './' -f 'ALL' --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
-//              dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+              container('owasp') {
+//            dependencyCheck additionalArguments: ''' -o './' -s './' -f 'ALL' --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+//            dependencyCheckPublisher pattern: 'dependency-check-report.xml'
               sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --format '"'ALL'"' --project '"'dso-demo'"' --out /reports'
             }
           }

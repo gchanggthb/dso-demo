@@ -25,6 +25,11 @@ spec:
           name: docker-sock
         - mountPath: /tmp/trivycache/
           name: trivycache
+    - name: owasp
+      image: owasp/dependency-check:12.1.9
+      volumeMounts:
+        - name: reports
+          mountPath: /reports
 #    - name: buildkitd
 #      image: moby/buildkit:master-rootless
 #      args:
@@ -106,6 +111,8 @@ spec:
 #        secretName: buildkit-daemon-certs
 #    - name: buildkitd
 #      emptyDir: {}
+    - name: reports
+      hostPath: /home/user1/reports
     - name: jenkins-docker-cfg
       projected:
         sources:

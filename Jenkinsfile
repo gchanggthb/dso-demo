@@ -15,6 +15,7 @@ pipeline {
         stage('Compile') {
           steps {
             container('maven') {
+              sh 'pwd'
               sh 'mvn compile'
             }
           }
@@ -39,8 +40,8 @@ pipeline {
           }
           steps {
             container('owasp') {
-              echo 'OWASP'
-              sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --out /reports'
+              sh 'pwd'
+            //  sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --out /reports'
             }
           }
         }

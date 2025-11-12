@@ -37,6 +37,9 @@ pipeline {
               yamlFile 'owasp-agent.yaml'
               defaultContainer 'owasp'
             }
+            options {
+              skipDefaultCheckout true
+            }
           }
           steps {
             container('owasp') {

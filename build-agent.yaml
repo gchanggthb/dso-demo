@@ -15,6 +15,8 @@ spec:
       volumeMounts:
         - name: m2
           mountPath: /root/.m2/
+        - name: shared
+          mountPath: /home/jenkins/agent/workspace
     - name: docker-tools
       image: rmkanda/docker-tools:latest
       command:
@@ -106,6 +108,9 @@ spec:
 #        secretName: buildkit-daemon-certs
 #    - name: buildkitd
 #      emptyDir: {}
+    - name: shared
+      hostPath:
+        path: /home/user1/shared
     - name: reports
       hostPath:
         path: /home/user1/reports

@@ -32,23 +32,9 @@ pipeline {
           }
         }
         stage('SCA') {
-/*          agent {
-            kubernetes {
-              yamlFile 'owasp-agent.yaml'
-              defaultContainer 'owasp'
-            }
-          }
-          options {
-            skipDefaultCheckout true
-          }
-*/
           steps {
             container('maven') {
               sh 'pwd'
-//              git branch: 'main'
-//                  credentialsId: gitcred
-//                  url: https://github.com/gchanggthb/dso-demo.git
-//              sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --out /reports'
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 sh 'mvn org.owasp:dependency-check-maven:check'
               }
@@ -57,6 +43,8 @@ pipeline {
           post {
             always {
               archiveArtifacts allowEmptyArchive: true, artifacts: 'target/dependency-check-report.html', fingerprint: true, onlyIfSucessful: true
+            }
+          }
         }
       }
     }

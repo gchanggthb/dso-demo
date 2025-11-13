@@ -15,8 +15,8 @@ spec:
       volumeMounts:
         - name: m2
           mountPath: /root/.m2/
-#        - name: shared
-#          mountPath: /home/jenkins/agent/workspace
+        - name: shared
+          mountPath: /home/jenkins/agent/workspace
     - name: docker-tools
       image: rmkanda/docker-tools:latest
       command:
@@ -27,6 +27,11 @@ spec:
           name: docker-sock
         - mountPath: /tmp/trivycache/
           name: trivycache
+     - name: owasp
+       image: owasp/dependency-check:12.1.9
+       volumeMounts:
+         - name: shared
+           mountPath: /src
 #    - name: buildkitd
 #      image: moby/buildkit:master-rootless
 #      args:
@@ -108,7 +113,8 @@ spec:
 #        secretName: buildkit-daemon-certs
 #    - name: buildkitd
 #      emptyDir: {}
-#    - name: shared
+    - name: shared
+      emptyDir: {}  
 #      hostPath:
 #        path: /home/user1/shared
     - name: reports

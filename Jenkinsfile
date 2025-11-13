@@ -32,7 +32,7 @@ pipeline {
           }
         }
         stage('SCA') {
-          agent {
+/*          agent {
             kubernetes {
               yamlFile 'owasp-agent.yaml'
               defaultContainer 'owasp'
@@ -41,6 +41,7 @@ pipeline {
           options {
             skipDefaultCheckout true
           }
+*/
           steps {
             container('owasp') {
               sh 'pwd'
@@ -48,6 +49,7 @@ pipeline {
 //                  credentialsId: gitcred
 //                  url: https://github.com/gchanggthb/dso-demo.git
             //  sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --out /reports'
+              
             }
           }
         }

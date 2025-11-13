@@ -44,6 +44,9 @@ pipeline {
           steps {
             container('owasp') {
               sh 'pwd'
+//              git branch: 'main'
+//                  credentialsId: gitcred
+//                  url: https://github.com/gchanggthb/dso-demo.git
             //  sh '/usr/share/dependency-check/bin/dependency-check.sh --scan . --out /reports'
             }
           }

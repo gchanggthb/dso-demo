@@ -9,8 +9,8 @@ spec:
   containers:
     - name: owasp
       image: owasp/dependency-check-action:latest
-#      command: ["/usr/share/dependency-check/bin/dependency-check.sh"]
-#      args: ["--scan", "/src", "--format", "ALL", "--project", "My Project", "--out", "/reports"]
+      command: ["/usr/share/dependency-check/bin/dependency-check.sh"]
+      args: ["--scan", "/src", "--format", "ALL", "--project", "My Project", "--out", "/reports"]
       tty: true
       volumeMounts:
         - name: src
@@ -19,8 +19,7 @@ spec:
           mountPath: /reports
   volumes:
     - name: src
-      hostPath:
-        path: /
+      emptyDir: {}
     - name: reports
       hostPath:
         path: /home/user1/reports

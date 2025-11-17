@@ -58,6 +58,7 @@ pipeline {
         success {
           archiveArtifacts allowEmptyArchive: true,
           artifacts: 'reports/*', fingerprint: true, onlyIfSuccessful: true
+
         }
       }
     }

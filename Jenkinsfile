@@ -36,7 +36,7 @@ pipeline {
             container('maven') {
               sh 'pwd'
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                sh 'mvn org.owasp:dependency-check-maven:check'
+//                sh 'mvn org.owasp:dependency-check-maven:check'
               }
             }
           }
@@ -48,7 +48,7 @@ pipeline {
         }
       }
     }
-/*    stage('SAST') {
+    stage('SAST') {
       steps {
         container('slscan') {
           sh 'scan --type java,depscan --build'
@@ -62,7 +62,7 @@ pipeline {
         }
       }
     }
-*/
+
     stage('Package') {
       parallel {
         stage('Create Jarfile') {

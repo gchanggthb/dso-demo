@@ -12,9 +12,6 @@ spec:
       command:
         - cat
       tty: true
-      resources:
-        requests:
-          ephemeral-storage: "1Mi"
       volumeMounts:
         - name: m2
           mountPath: /root/.m2/
@@ -30,13 +27,10 @@ spec:
           name: trivycache
     - name: slscan
       image: shiftleft/sast-scan:latest
-      imagePullPolicy: Always
+      imagePullPolicy: ifNotPresent
       command:
         - cat
       tty: true
-      resources:
-        requests:
-          ephemeral-storage: "1Mi"
     - name: trufflehog
       image: rmkanda/trufflehog
       command:
@@ -47,9 +41,6 @@ spec:
       command:
         - cat
       tty: true
-      resources:
-        requests:
-          ephemeral-storage: "1Mi"
   volumes:
     - name: m2
       hostPath:

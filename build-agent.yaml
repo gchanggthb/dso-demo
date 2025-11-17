@@ -27,7 +27,7 @@ spec:
           name: trivycache
     - name: slscan
       image: shiftleft/sast-scan:latest
-      imagePullPolicy: ifNotPresent
+      imagePullPolicy: IfNotPresent
       command:
         - cat
       tty: true

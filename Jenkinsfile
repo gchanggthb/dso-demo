@@ -59,6 +59,8 @@ pipeline {
             }
           }
         }
+      }
+    }
     stage('SAST') {
       steps {
         container('slscan') {

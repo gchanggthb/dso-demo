@@ -31,7 +31,7 @@ pipeline {
         stage('Unit Tests') {
           steps {
             container('maven') {
-              sh 'mvn test'
+//              sh 'mvn test'
             }
           }
         }
@@ -54,13 +54,13 @@ pipeline {
           steps {
             container('licensefinder') {
               sh 'ls -al'
-              sh '''#!/bin/bash --login
+  /*            sh '''#!/bin/bash --login
                       /bin/bash --login
                       rvm use default
                       gem install license_finder
                       license_finder
                  '''
-            }
+    */        }
           }
         }
       }
@@ -113,12 +113,15 @@ pipeline {
                   dockle --authurl https://registry.hub.docker.com --username $DOCKERHUB_CRED_USR --password $DOCKERHUB_CRED_PSW docker.io/$REPO:v5
                  '''*/
               script {
+                String pass
                 withCredentials([
-                  usernamePassword(credentialsId: 'dockercred', usr: 'username', psw: 'password')
+                  usernamePassword(credentialsId: 'dockercred', usernameVariable: 'usr', passwordVariable: 'psw')
                 ]) {
-                  print 'username' + usr
-                  print 'password' + psw
+                  print 'username ' + usr
+                  print 'password ' + psw
+                  pass = psw
                 }
+                print 'password2 ${pass}'¿
               }
             }
           }

@@ -106,7 +106,7 @@ pipeline {
               //sh 'dockle docker.io/gchangdckr/dsodemo'
               sh 'export DOCKLE_AUTH_URL=https://registry.hub.docker.com'
               sh 'export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR'
-              sh 'export DOCKLE_PASSWORD=$DOCKERHUB_CRED-PSW'
+              sh 'export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW'
               sh 'dockle docker.io/$REPO:v5'
             }
           }
@@ -114,6 +114,9 @@ pipeline {
         stage('Image Scan') {
           steps {
             container('docker-tools') {
+              //sh 'export TRIVY_AUTH_URL='
+              sh 'export TRIVY_PASSWORD=$DOCKERHUB_CRED_USR'
+              sh 'export TRIVY_USERNAME=$DOCKERHUB_CRED_PSW'
               sh 'trivy image --exit-code 1 $REPO:v5'
             }
           }

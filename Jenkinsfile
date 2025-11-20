@@ -121,7 +121,7 @@ pipeline {
                   print 'password ' + psw
                   pass = psw
                 }
-                print 'password2 ${pass}'¿
+                print 'password2 ${pass}'
               }
             }
           }

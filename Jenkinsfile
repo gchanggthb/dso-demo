@@ -113,6 +113,10 @@ pipeline {
                   dockle --authurl https://registry.hub.docker.com --username $DOCKERHUB_CRED_USR --password $DOCKERHUB_CRED_PSW docker.io/gchangdckr/dsodemo:v5
                  '''
 */
+              sh 'echo $DOCKERHUB_CRED_PSW > tmp2'
+              print 'pass2 '
+              sh 'cat tmp2'
+
               script {
                 String pass
                 withCredentials([
@@ -126,11 +130,8 @@ pipeline {
               //    sh 'docker logout'
               //    print 'pass '
               //    echo  $pass > tmp && cat tmp
-                  echo $DOCKERHUB_CRED_PSW > tmp2
-                  print 'pass2 '
-                  sh 'cat tmp2'
                 }
-                print 'password2 ' + pass
+                //print 'password2 ' + pass
               }
             }
           }

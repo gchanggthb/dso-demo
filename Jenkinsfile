@@ -110,7 +110,7 @@ pipeline {
                   echo $DOCKLE_USERNAME
                   export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
                   echo $DOCKLE_PASSWORD
-                  dockle docker.io/$REPO:v5
+                  dockle --authurl https://registry.hub.docker.com --username $DOCKERHUB_CRED_USR --password $DOCKERHUB_CRED_PSW docker.io/$REPO:v5
                  '''
             }
           }

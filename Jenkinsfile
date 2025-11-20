@@ -104,14 +104,14 @@ pipeline {
           steps {
             container('docker-tools') {
               //sh 'dockle docker.io/gchangdckr/dsodemo'
-              '''#!/bin/bash
-                export DOCKLE_AUTH_URL=https://registry.hub.docker.com
-                export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR
-                echo $DOCKLE_USERNAME
-                export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
-                echo $DOCKLE_PASSWORD
-                dockle docker.io/$REPO:v5
-              '''
+              sh '''#!/bin/bash
+                  export DOCKLE_AUTH_URL=https://registry.hub.docker.com
+                  export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR
+                  echo $DOCKLE_USERNAME
+                  export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
+                  echo $DOCKLE_PASSWORD
+                  dockle docker.io/$REPO:v5
+                 '''
             }
           }
         }
@@ -121,14 +121,14 @@ pipeline {
               //sh 'export TRIVY_AUTH_URL='
               //sh 'export TRIVY_PASSWORD=$DOCKERHUB_CRED_USR'
               //sh 'export TRIVY_USERNAME=$DOCKERHUB_CRED_PSW'
-              '''#!/bin/bash
-                export DOCKLE_AUTH_URL=https://registry.hub.docker.com
-                export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR
-                echo $DOCKLE_USERNAME
-                export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
-                echo $DOCKLE_PASSWORD
-                trivy image --exit-code 1 $REPO:v5
-              '''
+              sh '''#!/bin/bash
+                  export DOCKLE_AUTH_URL=https://registry.hub.docker.com
+                  export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR
+                  echo $DOCKLE_USERNAME
+                  export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
+                  echo $DOCKLE_PASSWORD
+                  trivy image --exit-code 1 $REPO:v5
+                 '''
             }
           }
         }

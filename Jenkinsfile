@@ -6,6 +6,10 @@ pipeline {
       idleMinutes 1
     }
   }
+  environment {
+    DOCKERHUB_CRED = credentials('dockercred')
+    REPO = "gchangdckr/dsodemo"
+  }
   triggers {
     githubPush()
   }
@@ -85,16 +89,38 @@ pipeline {
             }
           }
         }
-/*        stage('Docker BnP') {
+        stage('Docker BnP') {
           steps {
             container('buildkitd') {
-              sh 'buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=docker.io/gchangdckr/dsodemo:tag1,push=true'
+              sh 'buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=docker.io/gchangdckr/dsodemo:v5,push=true'
             }
           }
         }
-*/
       }
     }
+    stage('Image Analysis') {
+      parallel {
+        stage('Image Linting') {
+          steps {
+            container('docker-tools') {
+              //sh 'dockle docker.io/gchangdckr/dsodemo'
+              sh 'export DOCKLE_AUTH_URL=https://registry.hub.docker.com'
+              sh 'export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR'
+              sh 'export DOCKLE_PASSWORD=$DOCKERHUB_CRED-PSW'
+              sh 'dockle docker.io/$REPO:v5'
+            }
+          }
+        }
+        stage('Image Scan') {
+          steps {
+            container('docker-tools') {
+              sh 'trivy image --exit-code 1 $REPO:v5'
+            }
+          }
+        }
+      }
+    }
+
     stage('Deploy to Dev') {
       steps {
         // TODO

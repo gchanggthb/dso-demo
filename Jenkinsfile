@@ -128,7 +128,7 @@ pipeline {
               //    echo  $pass > tmp && cat tmp
                   echo $DOCKERHUB_CRED_PSW > tmp2
                   print 'pass2 '
-                  cat tmp2
+                  sh 'cat tmp2'
                 }
                 print 'password2 ' + pass
               }

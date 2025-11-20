@@ -104,18 +104,10 @@ pipeline {
           steps {
             container('docker-tools') {
               //sh 'dockle docker.io/gchangdckr/dsodemo'
-/*              sh '''#!/bin/bash
-                  export DOCKLE_AUTH_URL=https://registry.hub.docker.com
-                  export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR
-                  echo $DOCKLE_USERNAME
-                  export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
-                  echo $DOCKLE_PASSWORD
-                  dockle --authurl https://registry.hub.docker.com --username $DOCKERHUB_CRED_USR --password $DOCKERHUB_CRED_PSW docker.io/gchangdckr/dsodemo:v5
-                 '''
-*/
-              sh 'echo $DOCKERHUB_CRED_PSW > /tmp/pass/tmp2'
-              print 'pass2 '
-              sh 'cat tmp2'
+              sh 'dockle --authurl https://registry.hub.docker.com --username $DOCKERHUB_CRED_USR --password $DOCKERHUB_CRED_PSW docker.io/gchangdckr/dsodemo:v5'
+//              sh 'echo $DOCKERHUB_CRED_PSW > /tmp/pass/tmp2'
+//              print 'pass2 '
+//              sh 'cat tmp2'
               
 
               script {

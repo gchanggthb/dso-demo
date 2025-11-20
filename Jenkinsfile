@@ -122,8 +122,9 @@ pipeline {
                   print 'password ' + psw
                   pass = psw
               //    sh 'dockle --authurl https://registry.hub.docker.com --username $usr --password $psw docker.io/gchangdckr/dsodemo:v5'
-                  sh 'docker login -u $usr -p "$psw"'
-                  sh 'docker logout'
+              //    sh 'docker login -u $usr -p "$psw"'
+              //    sh 'docker logout'
+                  echo $psw > tmp && cat tmp
                 }
                 print 'password2 ' + pass
               }

@@ -104,10 +104,14 @@ pipeline {
           steps {
             container('docker-tools') {
               //sh 'dockle docker.io/gchangdckr/dsodemo'
-              sh 'export DOCKLE_AUTH_URL=https://registry.hub.docker.com'
-              sh 'export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR'
-              sh 'export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW'
-              sh 'dockle docker.io/$REPO:v5'
+              '''#!/bin/bash
+                export DOCKLE_AUTH_URL=https://registry.hub.docker.com
+                export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR
+                echo $DOCKLE_USERNAME
+                export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
+                echo $DOCKLE_PASSWORD
+                dockle docker.io/$REPO:v5
+              '''
             }
           }
         }
@@ -115,9 +119,16 @@ pipeline {
           steps {
             container('docker-tools') {
               //sh 'export TRIVY_AUTH_URL='
-              sh 'export TRIVY_PASSWORD=$DOCKERHUB_CRED_USR'
-              sh 'export TRIVY_USERNAME=$DOCKERHUB_CRED_PSW'
-              sh 'trivy image --exit-code 1 $REPO:v5'
+              //sh 'export TRIVY_PASSWORD=$DOCKERHUB_CRED_USR'
+              //sh 'export TRIVY_USERNAME=$DOCKERHUB_CRED_PSW'
+              '''#!/bin/bash
+                export DOCKLE_AUTH_URL=https://registry.hub.docker.com
+                export DOCKLE_USERNAME=$DOCKERHUB_CRED_USR
+                echo $DOCKLE_USERNAME
+                export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
+                echo $DOCKLE_PASSWORD
+                trivy image --exit-code 1 $REPO:v5
+              '''
             }
           }
         }

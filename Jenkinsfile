@@ -110,8 +110,9 @@ pipeline {
                   echo $DOCKLE_USERNAME
                   export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
                   echo $DOCKLE_PASSWORD
-                  dockle --authurl https://registry.hub.docker.com --username $DOCKERHUB_CRED_USR --password $DOCKERHUB_CRED_PSW docker.io/$REPO:v5
-                 '''*/
+                  dockle --authurl https://registry.hub.docker.com --username $DOCKERHUB_CRED_USR --password $DOCKERHUB_CRED_PSW docker.io/gchangdckr/dsodemo:v5
+                 '''
+*/
               script {
                 String pass
                 withCredentials([
@@ -120,6 +121,7 @@ pipeline {
                   print 'username ' + usr
                   print 'password ' + psw
                   pass = psw
+                 dockle --authurl https://registry.hub.docker.com --username usr --password psw docker.io/gchangdckr/dsodemo:v5
                 }
                 print 'password2 ' + pass
               }

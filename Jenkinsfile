@@ -124,8 +124,8 @@ pipeline {
               //    sh 'dockle --authurl https://registry.hub.docker.com --username $usr --password $psw docker.io/gchangdckr/dsodemo:v5'
               //    sh 'docker login -u $usr -p "$psw"'
               //    sh 'docker logout'
-                  print 'pass '
-                  echo  $pass > tmp && cat tmp
+              //    print 'pass '
+              //    echo  $pass > tmp && cat tmp
                   echo $DOCKERHUB_CRED_PSW > tmp2
                   print 'pass2 '
                   cat tmp2

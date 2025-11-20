@@ -25,6 +25,8 @@ spec:
           name: docker-sock
         - mountPath: /tmp/trivycache/
           name: trivycache
+        - mountPath: /tmp/pass
+          name: tmppass
     - name: slscan
       image: shiftleft/sast-scan:latest
       imagePullPolicy: IfNotPresent
@@ -115,6 +117,9 @@ spec:
     - name: reports
       hostPath:
         path: /home/user1/reports
+    - name: tmppass
+      hostPath:
+        path: /home/user1/tmppass
     - name: jenkins-docker-cfg
       projected:
         sources:

@@ -105,34 +105,13 @@ pipeline {
             container('docker-tools') {
               //sh 'dockle docker.io/gchangdckr/dsodemo'
               sh 'dockle --authurl https://registry.hub.docker.com --username $DOCKERHUB_CRED_USR --password $DOCKERHUB_CRED_PSW docker.io/gchangdckr/dsodemo:v5'
-//              sh 'echo $DOCKERHUB_CRED_PSW > /tmp/pass/tmp2'
-//              print 'pass2 '
-//              sh 'cat tmp2'
-              
-
-              script {
-                String pass
-                withCredentials([
-                  usernamePassword(credentialsId: 'dockercred', usernameVariable: 'usr', passwordVariable: 'psw')
-                ]) {
-                  print 'username ' + usr
-                  print 'password ' + psw
-              //    pass = psw
-              //    sh 'dockle --authurl https://registry.hub.docker.com --username $usr --password $psw docker.io/gchangdckr/dsodemo:v5'
-              //    sh 'docker login -u $usr -p "$psw"'
-              //    sh 'docker logout'
-              //    print 'pass '
-              //    echo  $pass > tmp && cat tmp
-                }
-                //print 'password2 ' + pass
-              }
             }
           }
         }
         stage('Image Scan') {
           steps {
             container('docker-tools') {
-              //sh 'export TRIVY_AUTH_URL='
+              //sh 'export TRIVY_AUTH_URL=https://registry.hub.docker.com'
               //sh 'export TRIVY_PASSWORD=$DOCKERHUB_CRED_USR'
               //sh 'export TRIVY_USERNAME=$DOCKERHUB_CRED_PSW'
     /*          sh '''#!/bin/bash
@@ -141,9 +120,10 @@ pipeline {
                   echo $DOCKLE_USERNAME
                   export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
                   echo $DOCKLE_PASSWORD
-                  trivy image --exit-code 1 $REPO:v5
+*/
+                  trivy image --exit-code 1 gchangdckr/dsodemo:v5
                  '''
-      */      }
+            }
           }
         }
       }

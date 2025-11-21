@@ -122,7 +122,7 @@ pipeline {
                   echo $DOCKLE_PASSWORD
 */
                   trivy image --exit-code 1 gchangdckr/dsodemo:v5
-                 '''
+                /* '''*/
             }
           }
         }

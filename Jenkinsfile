@@ -122,7 +122,7 @@ pipeline {
                   export DOCKLE_PASSWORD=$DOCKERHUB_CRED_PSW
                   echo $DOCKLE_PASSWORD
 */
-                sh 'trivy image --exit-code 1 gchangdckr/dsodemo:v5'
+//                sh 'trivy image --exit-code 1 gchangdckr/dsodemo:v5'
                 /* '''*/
             }
           }

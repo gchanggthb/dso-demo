@@ -21,7 +21,8 @@ spec:
         - cat
       tty: true
       volumeMounts:
-        - mountPath: /var/run
+#        - mountPath: /var/run
+        - mountPath: /run/containerd
           name: docker-sock
         - mountPath: /tmp/trivycache/
           name: trivycache
@@ -105,7 +106,7 @@ spec:
         path: /tmp/.m2/
     - name: docker-sock
       hostPath:
-        path: /var/run
+        path: /var/run/containerd
     - name: trivycache
       hostPath:
         path: /tmp/trivycache/

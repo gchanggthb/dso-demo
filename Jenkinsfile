@@ -136,8 +136,11 @@ pipeline {
         }
         steps {
           container('docker-tools') {
-            sh 'sudo docker run -t schoolofdevops/argocd-cli argocd app sync dso-demo --insecure --server $ARGO_SERVER --auth-token $AUTH_TOKEN'
-            sh 'sudo docker run -t schoolofdevops/argocd-cli argocd app wait dso-demo --health --timeout 300 --insecure --server $ARGO_SERVER --auth-token $AUTH_TOKEN'
+            //sh 'docker run -t schoolofdevops/argocd-cli argocd app sync dso-demo --insecure --server $ARGO_SERVER --auth-token $AUTH_TOKEN'
+            //sh 'docker run -t schoolofdevops/argocd-cli argocd app wait dso-demo --health --timeout 300 --insecure --server $ARGO_SERVER --auth-token $AUTH_TOKEN'
+	    sh 'ctr pull image docker.io/schoolofdevops/argocd-cli:latest'
+	    sh 'ctr run -t schoolofdevops/argocd-cli:latest argocd app sync dso-demo --insecure --server $ARGO_SERVER --auth-token $AUTH_TOKEN'
+	    sh 'ctr run -t schoolofdevops/argocd-cli:latest argocd app wait dso-demo --health --timeout 300 --insecure --server $ARGO_SERVER --auth-token $AUTH_TOKEN'
           }
         }
     }
